@@ -16,19 +16,24 @@ pipeline {
 
 		stage (' Checkout') { 
 			steps {
-				sh 'rm -rf /https://github.com/spadevapps/2020_03_DO_Boston_casestudy_part_1'
-				sh 'git clone https://github.com/spadevapps/2020_03_DO_Boston_casestudy_part_1'
+				script {
+					sh 'rm -rf /https://github.com/spadevapps/2020_03_DO_Boston_casestudy_part_1'
+					sh 'git clone https://github.com/spadevapps/2020_03_DO_Boston_casestudy_part_1'
+				}
+			}
 		}
-	}
 		stage ('Build') {
 			steps {
+				script {
+				
 				sh 'docker image build -t sba.casestudy '
 				sh 'docker image tag sba.casestudy  spadevapps/sba.casestudy:latest'
 				withCredentials([ 
-					usernamePassword(credentials: 'dockerhub_credentials', usernameVariable: dockUsr, passwordVariable: dockPswd)
+					usernamePassword(credentialsId: 'dockerhub_credentials', usernameVariable: dockUsr, passwordVariable: dockPswd)
 				]) {
 					sh 'docker push spadevapps/sba.casestudy:latest'
 					}
+				}
 			}
  	
 		}
