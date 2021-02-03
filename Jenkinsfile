@@ -1,19 +1,49 @@
 // Powered by Infostretch 
+//maybe install plugins
 
-timestamps {
+pipeline {
 
-node () {
-
-	stage ('jenkinsSBA - Checkout') {
- 	 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/spadevapps/sba.jenkins-github-pipeline.git']]]) 
+	agents any
+	enviroment {
+		dockerhub_credentials = credentials('dockerhub_credentials')
+		docker_repo = 'https://hub.docker.com/repository/docker/spadevapps/sba.casestudy'
+		git_repo = 'https://github.com/spadevapps/2020_03_DO_Boston_casestudy_part_1'
 	}
-	stage ('jenkinsSBA - Build') {
-		steps {
-			powershell "py -m pip install -r requirements.txt"
-			powershell "py web.py"
-		}
+	stages {
+	
+
+		stage (' Checkout') { 
+		sh 'rm -rf /https://github.com/spadevapps/2020_03_DO_Boston_casestudy_part_1'
+		sh'git clone https://github.com/spadevapps/2020_03_DO_Boston_casestudy_part_1'
+	}
+		stage ('Build') {
+			steps {
+				sh 'docker image build -t sba.casestudy '
+				sh 'docker image tag sba.casestudy  spadevapps/sba.casestudy:latest'
+				withCredentials([ 
+					usernamePassword(credentials: 'dockerhub_credentials', usernameVariable: dockUsr, passwordVariable: dockPswd)
+				]) {
+					sh 'docker push spadevapps/sba.casestudy:latest'
+					}
+			}
  	
-// Unable to convert a build step referring to "hudson.plugins.powershell.PowerShell". Please verify and convert manually if required. 
+		}
+		stage ('deploy') {
+			steps {
+				//sh 'kubectl apply -f kubernetes.yml '
+				//ansible command? 
+			}
+ 	
+		}
+		
 	}
 }
-}
+
+/*
+docker image build -t sba.casestudy .
+docker image tag sba.casestudy  spadevapps/sba.casestudy:v1
+docker push spadevapps/sba.casestudy:v1
+
+*/
+
+//kubectl apply -f kubernetes.yml  
