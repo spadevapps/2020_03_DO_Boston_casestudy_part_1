@@ -34,6 +34,7 @@ pipeline {
 		}
 		stage ('deploy') {
 			steps {
+				echo "kubernetes step"
 				//sh 'kubectl apply -f kubernetes.yml '
 				//ansible command? 
 			}
