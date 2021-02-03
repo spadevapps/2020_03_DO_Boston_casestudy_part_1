@@ -31,7 +31,7 @@ pipeline {
 				withCredentials([ 
 					usernamePassword(credentialsId: 'docker_credentials', usernameVariable: dockUsr, passwordVariable: dockPswd)
 				]) {
-					sh "docker login -u ${dockUsr} -p ${dockPswd}"
+					sh 'docker login -u "$dockUsr" -p "$dockPswd"'
 					sh 'docker image push spadevapps/sba.casestudy:latest'
 					}
 				}
