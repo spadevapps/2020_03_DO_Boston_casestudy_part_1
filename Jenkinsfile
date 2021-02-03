@@ -3,18 +3,22 @@
 
 pipeline {
 
-	agents any
-	enviroment {
+	agent any
+	
+	environment {
 		dockerhub_credentials = credentials('dockerhub_credentials')
 		docker_repo = 'https://hub.docker.com/repository/docker/spadevapps/sba.casestudy'
 		git_repo = 'https://github.com/spadevapps/2020_03_DO_Boston_casestudy_part_1'
 	}
+	
 	stages {
 	
 
 		stage (' Checkout') { 
-		sh 'rm -rf /https://github.com/spadevapps/2020_03_DO_Boston_casestudy_part_1'
-		sh'git clone https://github.com/spadevapps/2020_03_DO_Boston_casestudy_part_1'
+			steps {
+				sh 'rm -rf /https://github.com/spadevapps/2020_03_DO_Boston_casestudy_part_1'
+				sh 'git clone https://github.com/spadevapps/2020_03_DO_Boston_casestudy_part_1'
+		}
 	}
 		stage ('Build') {
 			steps {
