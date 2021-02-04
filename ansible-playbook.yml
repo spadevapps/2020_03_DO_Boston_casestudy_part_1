@@ -46,7 +46,7 @@
     wait_for:
       timeout: 300
   - name: descripe
-    shell: ./kubernetes-cluster-information.sh > somelog3.txt
+    shell: ./kubernetes-cluster-information.sh > somelogWroks.txt
     args:
       chdir: /home/ansiblem/gitRepos/2020_03_DO_Boston_casestudy_part_1
 

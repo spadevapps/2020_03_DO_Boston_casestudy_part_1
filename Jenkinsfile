@@ -44,8 +44,8 @@ pipeline {
 		stage ('deploy') {
 			steps {
 				echo "kubernetes step"
-				sh 'docker run spadevapps/sba.casestudy:latest'
-				sh 'ansible-playbook ansible-playbook.yml'
+				ansiblePlaybook(playbook: 'ansible-playbook.yml')
+				
 			}
  	
 		}
