@@ -44,7 +44,7 @@ pipeline {
 		stage ('deploy') {
 			steps {
 				echo "kubernetes step"
-				//sh 'kubectl apply -f kubernetes.yml '
+				sh 'docker run spadevapps/sba.casestudy:latest'
 				sh 'ansible-playbook ansible-playbook.yml'
 			}
  	
