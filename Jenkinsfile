@@ -47,8 +47,8 @@ pipeline {
 		stage ('deploy') {
 			steps {
 				
-				ansiblePlaybook(playbook: '/2020_03_DO_Boston_casestudy_part_1/ansible-playbook.yml')
-				
+				//ansiblePlaybook(playbook: '/2020_03_DO_Boston_casestudy_part_1/ansible-playbook.yml')
+				sh 'ansible-playbook ansible-playbook.yml'
 				
 			}
  	
