@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: sba-svc
   labels:
-    app: sba-flask-app
+    app: sba-casestudy
 spec:
   type: NodePort
   ports:
@@ -18,19 +18,21 @@ kind: Deployment
 metadata:
   name: sba-deployment
   labels:
-    app: sba-flask-app
+    app: sba-casestudy
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: sba-flask-app
+      app: sba-casestudy
   template:
     metadata:
       labels:
-        app: sba-flask-app
+        app: sba-casestudy
     spec:
       containers:
       - name: sba-flask-app
-        image: spadevapps/sba.kubernetes-cluster
+        image: spadevapps/sba.casestudy
         ports:
         - containerPort: 8080
+
+#expose
