@@ -19,13 +19,14 @@ pipeline {
 				script {
 					sh 'rm -rf 2020_03_DO_Boston_casestudy_part_1'
 					sh 'git clone https://github.com/spadevapps/2020_03_DO_Boston_casestudy_part_1'
+					sh 'pwd'
 				}
 			}
 		}
 		stage ('Build') {
 			steps {
 				script {
-				
+				sh 'pwd'
 				dir('2020_03_DO_Boston_casestudy_part_1') {
 				sh 'docker image build -t sba.casestudy .'
 				sh 'docker image tag sba.casestudy  spadevapps/sba.casestudy:latest'
@@ -44,6 +45,7 @@ pipeline {
 		stage ('deploy') {
 			steps {
 				echo "kubernetes step"
+				sh 'pwd'
 				dir('2020_03_DO_Boston_casestudy_part_1') {
 				ansiblePlaybook(playbook: 'ansible-playbook.yml')
 				}
