@@ -28,7 +28,7 @@ pipeline {
 			steps {
 				script {
 				sh 'pwd'
-				sh 'ls'
+				sh 'ls 2020_03_DO_Boston_casestudy_part_1'
 				dir('2020_03_DO_Boston_casestudy_part_1') {
 				sh 'docker image build -t sba.casestudy .'
 				sh 'docker image tag sba.casestudy  spadevapps/sba.casestudy:latest'
@@ -46,10 +46,8 @@ pipeline {
 		}
 		stage ('deploy') {
 			steps {
-				echo "kubernetes step"
-				sh 'pwd'
 				
-				ansiblePlaybook(playbook: '/var/jenkins_home/workspace/sba2/ansible-playbook.yml')
+				ansiblePlaybook(playbook: '/2020_03_DO_Boston_casestudy_part_1/ansible-playbook.yml')
 				
 				
 			}
