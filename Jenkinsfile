@@ -17,6 +17,7 @@ pipeline {
 		stage (' Checkout') { 
 			steps {
 				script {
+					sh 'ls'
 					sh 'rm -rf 2020_03_DO_Boston_casestudy_part_1'
 					sh 'git clone https://github.com/spadevapps/2020_03_DO_Boston_casestudy_part_1'
 					sh 'pwd'
@@ -27,6 +28,7 @@ pipeline {
 			steps {
 				script {
 				sh 'pwd'
+				sh 'ls'
 				dir('2020_03_DO_Boston_casestudy_part_1') {
 				sh 'docker image build -t sba.casestudy .'
 				sh 'docker image tag sba.casestudy  spadevapps/sba.casestudy:latest'
