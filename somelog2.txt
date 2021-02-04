@@ -1,0 +1,390 @@
+Deployment info
+
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+sba-deployment   0/3     3            0           11s
+
+Name:                   sba-deployment
+Namespace:              default
+CreationTimestamp:      Thu, 04 Feb 2021 03:47:14 -0500
+Labels:                 app=sba-casestudy
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=sba-casestudy
+Replicas:               3 desired | 3 updated | 3 total | 0 available | 3 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=sba-casestudy
+  Containers:
+   sba-flask-app:
+    Image:        spadevapps/sba.casestudy
+    Port:         8080/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      False   MinimumReplicasUnavailable
+  Progressing    True    ReplicaSetUpdated
+OldReplicaSets:  <none>
+NewReplicaSet:   sba-deployment-85bbdb975d (3/3 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  6s    deployment-controller  Scaled up replica set sba-deployment-85bbdb975d to 3
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"sba-casestudy"},"name":"sba-deployment","namespace":"default"},"spec":{"replicas":3,"selector":{"matchLabels":{"app":"sba-casestudy"}},"template":{"metadata":{"labels":{"app":"sba-casestudy"}},"spec":{"containers":[{"image":"spadevapps/sba.casestudy","name":"sba-flask-app","ports":[{"containerPort":8080}]}]}}}}
+  creationTimestamp: "2021-02-04T08:47:14Z"
+  generation: 1
+  labels:
+    app: sba-casestudy
+  managedFields:
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:labels:
+          .: {}
+          f:app: {}
+      f:spec:
+        f:progressDeadlineSeconds: {}
+        f:replicas: {}
+        f:revisionHistoryLimit: {}
+        f:selector: {}
+        f:strategy:
+          f:rollingUpdate:
+            .: {}
+            f:maxSurge: {}
+            f:maxUnavailable: {}
+          f:type: {}
+        f:template:
+          f:metadata:
+            f:labels:
+              .: {}
+              f:app: {}
+          f:spec:
+            f:containers:
+              k:{"name":"sba-flask-app"}:
+                .: {}
+                f:image: {}
+                f:imagePullPolicy: {}
+                f:name: {}
+                f:ports:
+                  .: {}
+                  k:{"containerPort":8080,"protocol":"TCP"}:
+                    .: {}
+                    f:containerPort: {}
+                    f:protocol: {}
+                f:resources: {}
+                f:terminationMessagePath: {}
+                f:terminationMessagePolicy: {}
+            f:dnsPolicy: {}
+            f:restartPolicy: {}
+            f:schedulerName: {}
+            f:securityContext: {}
+            f:terminationGracePeriodSeconds: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2021-02-04T08:47:14Z"
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          f:deployment.kubernetes.io/revision: {}
+      f:status:
+        f:conditions:
+          .: {}
+          k:{"type":"Available"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Progressing"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+        f:observedGeneration: {}
+        f:replicas: {}
+        f:unavailableReplicas: {}
+        f:updatedReplicas: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2021-02-04T08:47:21Z"
+  name: sba-deployment
+  namespace: default
+  resourceVersion: "462"
+  uid: 45a9574d-80dd-4d7b-9b5b-fd055719f4c9
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: sba-casestudy
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: sba-casestudy
+    spec:
+      containers:
+      - image: spadevapps/sba.casestudy
+        imagePullPolicy: Always
+        name: sba-flask-app
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  conditions:
+  - lastTransitionTime: "2021-02-04T08:47:20Z"
+    lastUpdateTime: "2021-02-04T08:47:20Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  - lastTransitionTime: "2021-02-04T08:47:20Z"
+    lastUpdateTime: "2021-02-04T08:47:21Z"
+    message: ReplicaSet "sba-deployment-85bbdb975d" is progressing.
+    reason: ReplicaSetUpdated
+    status: "True"
+    type: Progressing
+  observedGeneration: 1
+  replicas: 3
+  unavailableReplicas: 3
+  updatedReplicas: 3
+
+
+
+Pod Info
+
+NAME                              READY   STATUS              RESTARTS   AGE
+sba-deployment-85bbdb975d-9t9z5   0/1     ContainerCreating   0          5s
+sba-deployment-85bbdb975d-c29qb   0/1     ErrImagePull        0          5s
+sba-deployment-85bbdb975d-spfr8   0/1     ErrImagePull        0          5s
+
+NAME                              READY   STATUS              RESTARTS   AGE   IP           NODE             NOMINATED NODE   READINESS GATES
+sba-deployment-85bbdb975d-9t9z5   0/1     ContainerCreating   0          5s    <none>       ansible-master   <none>           <none>
+sba-deployment-85bbdb975d-c29qb   0/1     ErrImagePull        0          5s    172.17.0.2   ansible-master   <none>           <none>
+sba-deployment-85bbdb975d-spfr8   0/1     ErrImagePull        0          5s    172.17.0.3   ansible-master   <none>           <none>
+
+Name:           sba-deployment-85bbdb975d-9t9z5
+Namespace:      default
+Priority:       0
+Node:           ansible-master/192.168.1.214
+Start Time:     Thu, 04 Feb 2021 03:47:23 -0500
+Labels:         app=sba-casestudy
+                pod-template-hash=85bbdb975d
+Annotations:    <none>
+Status:         Pending
+IP:             
+IPs:            <none>
+Controlled By:  ReplicaSet/sba-deployment-85bbdb975d
+Containers:
+  sba-flask-app:
+    Container ID:   
+    Image:          spadevapps/sba.casestudy
+    Image ID:       
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-hfgzx (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
+Volumes:
+  default-token-hfgzx:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-hfgzx
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age              From               Message
+  ----     ------            ----             ----               -------
+  Warning  FailedScheduling  5s (x2 over 5s)  default-scheduler  0/1 nodes are available: 1 node(s) had taint {node.kubernetes.io/not-ready: }, that the pod didn't tolerate.
+  Normal   Scheduled         3s               default-scheduler  Successfully assigned default/sba-deployment-85bbdb975d-9t9z5 to ansible-master
+  Normal   Pulling           1s               kubelet            Pulling image "spadevapps/sba.casestudy"
+  Warning  Failed            0s               kubelet            Failed to pull image "spadevapps/sba.casestudy": rpc error: code = Unknown desc = Error response from daemon: pull access denied for spadevapps/sba.casestudy, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+  Warning  Failed            0s               kubelet            Error: ErrImagePull
+
+
+Name:         sba-deployment-85bbdb975d-c29qb
+Namespace:    default
+Priority:     0
+Node:         ansible-master/192.168.1.214
+Start Time:   Thu, 04 Feb 2021 03:47:23 -0500
+Labels:       app=sba-casestudy
+              pod-template-hash=85bbdb975d
+Annotations:  <none>
+Status:       Pending
+IP:           172.17.0.2
+IPs:
+  IP:           172.17.0.2
+Controlled By:  ReplicaSet/sba-deployment-85bbdb975d
+Containers:
+  sba-flask-app:
+    Container ID:   
+    Image:          spadevapps/sba.casestudy
+    Image ID:       
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       ErrImagePull
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-hfgzx (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
+Volumes:
+  default-token-hfgzx:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-hfgzx
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age              From               Message
+  ----     ------            ----             ----               -------
+  Warning  FailedScheduling  5s (x2 over 5s)  default-scheduler  0/1 nodes are available: 1 node(s) had taint {node.kubernetes.io/not-ready: }, that the pod didn't tolerate.
+  Normal   Scheduled         3s               default-scheduler  Successfully assigned default/sba-deployment-85bbdb975d-c29qb to ansible-master
+  Normal   Pulling           2s               kubelet            Pulling image "spadevapps/sba.casestudy"
+  Warning  Failed            1s               kubelet            Failed to pull image "spadevapps/sba.casestudy": rpc error: code = Unknown desc = Error response from daemon: pull access denied for spadevapps/sba.casestudy, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+  Warning  Failed            1s               kubelet            Error: ErrImagePull
+  Normal   BackOff           0s               kubelet            Back-off pulling image "spadevapps/sba.casestudy"
+  Warning  Failed            0s               kubelet            Error: ImagePullBackOff
+
+
+Name:         sba-deployment-85bbdb975d-spfr8
+Namespace:    default
+Priority:     0
+Node:         ansible-master/192.168.1.214
+Start Time:   Thu, 04 Feb 2021 03:47:23 -0500
+Labels:       app=sba-casestudy
+              pod-template-hash=85bbdb975d
+Annotations:  <none>
+Status:       Pending
+IP:           172.17.0.3
+IPs:
+  IP:           172.17.0.3
+Controlled By:  ReplicaSet/sba-deployment-85bbdb975d
+Containers:
+  sba-flask-app:
+    Container ID:   
+    Image:          spadevapps/sba.casestudy
+    Image ID:       
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       ErrImagePull
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-hfgzx (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
+Volumes:
+  default-token-hfgzx:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-hfgzx
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age              From               Message
+  ----     ------            ----             ----               -------
+  Warning  FailedScheduling  5s (x2 over 5s)  default-scheduler  0/1 nodes are available: 1 node(s) had taint {node.kubernetes.io/not-ready: }, that the pod didn't tolerate.
+  Normal   Scheduled         3s               default-scheduler  Successfully assigned default/sba-deployment-85bbdb975d-spfr8 to ansible-master
+  Normal   Pulling           2s               kubelet            Pulling image "spadevapps/sba.casestudy"
+  Warning  Failed            1s               kubelet            Failed to pull image "spadevapps/sba.casestudy": rpc error: code = Unknown desc = Error response from daemon: pull access denied for spadevapps/sba.casestudy, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+  Warning  Failed            1s               kubelet            Error: ErrImagePull
+  Normal   BackOff           0s               kubelet            Back-off pulling image "spadevapps/sba.casestudy"
+  Warning  Failed            0s               kubelet            Error: ImagePullBackOff
+
+
+
+Sercive Info
+
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP          22s
+sba-svc      NodePort    10.99.255.138   <none>        8080:32000/TCP   12s
+
+Name:                     sba-svc
+Namespace:                default
+Labels:                   app=sba-casestudy
+Annotations:              <none>
+Selector:                 app=sba-casestudy
+Type:                     NodePort
+IP Families:              <none>
+IP:                       10.99.255.138
+IPs:                      10.99.255.138
+Port:                     <unset>  8080/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  32000/TCP
+Endpoints:                
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+
+
+
+Node Info
+
+NAME             STATUS   ROLES                  AGE   VERSION
+ansible-master   Ready    control-plane,master   25s   v1.20.2

@@ -40,7 +40,21 @@
     command: minikube start --driver=none
   - name: Minikube Deployment
     command: kubectl apply -f kubernetes.yml
+  - name: make executable
+    command: chmod +x kubernetes-cluster-information.sh
+  - name: timeout
+    wait_for:
+      timeout: 300
+  - name: descripe
+    shell: ./kubernetes-cluster-information.sh > somelog3.txt
+    args:
+      chdir: /home/ansiblem/gitRepos/2020_03_DO_Boston_casestudy_part_1
+
+    
 
 #try toms micro8 service
 #try using client vm
 #https://kubernetes.io/blog/2019/03/15/kubernetes-setup-using-ansible-and-vagrant
+#echo output of info.sh or create new txt file
+#curl localhost
+
