@@ -1,0 +1,60 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+  - name: Install packages that allow apt to be used over HTTPS
+    apk:
+      name: "{{ packages }}"
+      state: present
+    vars:
+      packages:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg-agent
+      - software-properties-common
+  - name: Add an apt signing key for Kubernetes
+    apk_key:
+      url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+      state: present
+  - name: Adding apt repository for Kubernetes
+    apk_repository:
+      repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+      state: present
+      filename: kubernetes.list
+  - name: Install Kubernetes binaries
+    apk:
+      name: "{{ packages }}"
+      state: present
+    vars:
+      packages:
+        - kubelet
+        - kubeadm
+        - kubectl
+        - minikube
+  - name: minikubes delete
+    command: minikube delete
+  - name: sysctl
+    command: sysctl fs.protected_regular=0
+  - name: minikube start
+    command: minikube start --driver=none
+  - name: Minikube Deployment
+    command: kubectl apply -f kubernetes.yml
+  - name: make executable
+    command: chmod +x kubernetes-cluster-information.sh
+  - name: timeout
+    wait_for:
+      timeout: 60
+  - name: descripe
+    shell: ./kubernetes-cluster-information.sh > somelogWroks.txt
+    args:
+      chdir: /home/ansiblem/gitRepos/2020_03_DO_Boston_casestudy_part_1
+
+    
+
+#try toms micro8 service
+#try using client vm
+#https://kubernetes.io/blog/2019/03/15/kubernetes-setup-using-ansible-and-vagrant
+#echo output of info.sh or create new txt file
+#curl localhost
+

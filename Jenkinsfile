@@ -46,9 +46,10 @@ pipeline {
 		}
 		stage ('deploy') {
 			steps {
-			
-				ansiblePlaybook(playbook: 'ansible-playbook.yml')
-				//sh 'ansible-playbook ansible-playbook.yml'
+				sh 'whoami'
+				
+				//ansiblePlaybook(playbook: 'ansible-playbook2.yml')
+				sh 'ansible-playbook ansible-playbook.yml'
 				
 			}
  	
