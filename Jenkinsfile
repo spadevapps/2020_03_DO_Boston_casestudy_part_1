@@ -49,7 +49,7 @@ pipeline {
 				echo "kubernetes step"
 				sh 'pwd'
 				
-				ansiblePlaybook(playbook: './ansible-playbook.yml')
+				ansiblePlaybook(playbook: '/var/jenkins_home/workspace/sba2/ansible-playbook.yml')
 				
 				
 			}
