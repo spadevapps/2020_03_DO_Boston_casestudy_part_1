@@ -46,10 +46,10 @@ pipeline {
 		}
 		stage ('deploy') {
 			steps {
-				script {
+			
 				ansiblePlaybook(playbook: 'ansible-playbook.yml')
 				//sh 'ansible-playbook ansible-playbook.yml'
-				}
+				
 			}
  	
 		}
