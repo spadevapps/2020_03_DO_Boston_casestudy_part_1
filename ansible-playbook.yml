@@ -31,7 +31,12 @@
         - kubelet
         - kubeadm
         - kubectl
-  - name: minikube
+        - minikube
+  - name: minikubes delete
+    command: minikube delete
+  - name: sysctl
+    command: sysctl fs.protected_regular=0
+  - name: minikube start
     command: minikube start --driver=none
   - name: Minikube Deployment
     command: kubectl apply -f kubernetes.yml

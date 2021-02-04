@@ -45,7 +45,7 @@ pipeline {
 			steps {
 				echo "kubernetes step"
 				//sh 'kubectl apply -f kubernetes.yml '
-				//ansible command? 
+				sh 'ansible-playbook ansible-playbook.yml'
 			}
  	
 		}
