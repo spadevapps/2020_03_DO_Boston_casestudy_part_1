@@ -44,7 +44,9 @@ pipeline {
 		stage ('deploy') {
 			steps {
 				echo "kubernetes step"
+				dir('2020_03_DO_Boston_casestudy_part_1') {
 				ansiblePlaybook(playbook: 'ansible-playbook.yml')
+				}
 				
 			}
  	
